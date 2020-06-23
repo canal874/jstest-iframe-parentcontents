@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>iframe playground</title>
+    <title>iframe parent/child playground</title>
     <script type="text/javascript" src="index.js"></script>
   </head>
   <body style="font-size: 14px;">
@@ -18,13 +18,22 @@
         style="width:700px; height:70px; border:1px solid black; overflow-y: scroll"
       ></div>
     </div>
-    <h1 style="margin-top: 100px;">iframe playground</h1>
+    <h1 style="margin-top: 100px;">&lt;iframe&gt; parent/child playground</h1>
     <p>
-      [button] => expected result
-    </p>
+      Usage guide:<br />
+      <ul>
+        <li>This HTML document (parent) has many iframes (children) with different settings.
+        <li>Push [button] => expected result (as of Jun.23, 2020) will be happen </li>
+        <li>Successful result will be shown on output area. </li>
+        <li>Catchable error will be shown on output area.</li>
+        <li>Uncaught error will be shown on console log of development tool. (Cross-origin error in postMessage() cannot be try catch.)</li>
+        <li>Verified on Chrome and Firefox</li>
+        <li>Have fun!</li>
+      </ul>
+</p>
     <hr />
     <h2>
-      &lt;iframe src="child.html"/&gt;
+      (1) &lt;iframe src="child.html"/&gt;(same origin)
     </h2>
 
     <input
@@ -44,19 +53,22 @@
       onclick="postToChild('01', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
       value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
     />
-    => Nothing happens<br /><br />
+    => Cross-origin error on console log<br />
+    <br /><br />
 
     <iframe id="childFrame01" src="child.html" width="700"></iframe>
 
+    <hr />
     <h2>
-      &lt;iframe src="https://stoic-babbage-af94cf.netlify.app/child.html"/&gt;
+      (2) &lt;iframe
+      src="https://stoic-babbage-af94cf.netlify.app/child.html"/&gt;
     </h2>
     <input
       type="button"
       onclick="sayToChild('02', 'Hello from parent via contentWindow')"
       value="Hello to child via contentWindow"
     />
-    => Error<br />
+    => Cross-origin error on output<br />
     <input
       type="button"
       onclick="postToChild('02', 'Hello from parent via postMessage', '*')"
@@ -74,10 +86,105 @@
       onclick="postToChild('02', 'Hello from parent via postMessage', 'https://google.com/')"
       value="Hello to child via postMessage, targetOrigin 'https://google.com/'"
     />
-    => Nothing happens<br /><br />
+    => Nothing happens (Chrome) , Cross-origin error on console (Firefox)<br /><br />
 
     <iframe
       id="childFrame02"
+      src="https://stoic-babbage-af94cf.netlify.app/child.html"
+      width="700"
+    ></iframe>
+    <br />
+
+    <hr />
+    <h2>
+      (3) &lt;iframe sandbox src="child3.html"/&gt;(same origin)
+    </h2>
+
+    <input
+      type="button"
+      onclick="sayToChild('03', 'Hello from parent via contentWindow')"
+      value="Hello to child via contentWindow"
+    />
+    => Cross-origin error on output<br />
+    <input
+      type="button"
+      onclick="postToChild('03', 'Hello from parent via postMessage', '*')"
+      value="Hello to child via postMessage, targetOrigin '*'"
+    />
+    => Nothing happens (because script not allowed in the child frame)<br />
+    <input
+      type="button"
+      onclick="postToChild('03', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+    />
+    => Cross-origin error on console log<br /><br />
+
+    <iframe sandbox id="childFrame03" src="child3.html" width="700"></iframe>
+
+    <hr />
+    <h2>
+      (4) &lt;iframe sandbox="allow-scripts" src="child4.html"/&gt;(same origin)
+    </h2>
+
+    <input
+      type="button"
+      onclick="sayToChild('04', 'Hello from parent via contentWindow')"
+      value="Hello to child via contentWindow"
+    />
+    => Cross-origin error on output<br />
+    <input
+      type="button"
+      onclick="postToChild('04', 'Hello from parent via postMessage', '*')"
+      value="Hello to child via postMessage, targetOrigin '*'"
+    />
+    => Success<br />
+    <input
+      type="button"
+      onclick="postToChild('04', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+    />
+    => Cross-origin error on console log<br /><br />
+
+    <iframe
+      sandbox="allow-scripts"
+      id="childFrame04"
+      src="child4.html"
+      width="700"
+    ></iframe>
+
+    <hr />
+    <h2>
+      (5) &lt;iframe sandbox="allow-scripts"
+      src="https://stoic-babbage-af94cf.netlify.app/child.html"/&gt;
+    </h2>
+    <input
+      type="button"
+      onclick="sayToChild('05', 'Hello from parent via contentWindow')"
+      value="Hello to child via contentWindow"
+    />
+    => Cross-origin error on output<br />
+    <input
+      type="button"
+      onclick="postToChild('05', 'Hello from parent via postMessage', '*')"
+      value="Hello to child via postMessage, targetOrigin '*'"
+    />
+    => Success<br />
+    <input
+      type="button"
+      onclick="postToChild('05', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+    />
+    => Nothing happens<br />
+    <input
+      type="button"
+      onclick="postToChild('05', 'Hello from parent via postMessage', 'https://google.com/')"
+      value="Hello to child via postMessage, targetOrigin 'https://google.com/'"
+    />
+    => Nothing happens (Chrome), Cross-orgin error on console log (Firefox)<br /><br />
+
+    <iframe
+      sandbox="allow-scripts"
+      id="childFrame05"
       src="https://stoic-babbage-af94cf.netlify.app/child.html"
       width="700"
     ></iframe>
