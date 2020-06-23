@@ -1,5 +1,5 @@
-# <iframe> parent/child playground
-  
+# <iframe> security playground
+
 Created with CodeSandbox
 
 CodeSandbox: https://codesandbox.io/s/github/canal874/jstest-iframe-parentcontents
