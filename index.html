@@ -6,22 +6,78 @@
     <script type="text/javascript" src="index.js"></script>
   </head>
   <body style="font-size: 14px;">
-    <h1>iframe playground</h1>
-    output <input type="button" onclick="document.getElementById('result').innerHTML=''" value="clear"> 
-    <div id="result" style="width:700px; height:70px; border:1px solid black; overflow-y: scroll"></div>
-    <h2>&lt;iframe/&gt;<h2 />
+    <div style="position: fixed; top:0px; background-color: white;">
+      output
+      <input
+        type="button"
+        onclick="document.getElementById('result').innerHTML=''"
+        value="clear"
+      />
+      <div
+        id="result"
+        style="width:700px; height:70px; border:1px solid black; overflow-y: scroll"
+      ></div>
+    </div>
+    <h1 style="margin-top: 100px;">iframe playground</h1>
+    <p>
+      [button] => expected result
+    </p>
+    <hr />
+    <h2>
+      &lt;iframe src="child.html"/&gt;
+    </h2>
+
     <input
       type="button"
-      onclick="sayToChild('Hello from parent via contentWindow')"
+      onclick="sayToChild('01', 'Hello from parent via contentWindow')"
       value="Hello to child via contentWindow"
-    /><br />
+    />
+    => Success<br />
     <input
       type="button"
-      onclick="postToChild('Hello from parent via postMessage', '*')"
+      onclick="postToChild('01', 'Hello from parent via postMessage', '*')"
       value="Hello to child via postMessage, targetOrigin '*'"
-    /><br />
+    />
+    => Success<br />
+    <input
+      type="button"
+      onclick="postToChild('01', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+    />
+    => Nothing happens<br /><br />
+
+    <iframe id="childFrame01" src="child.html" width="700"></iframe>
+
+    <h2>
+      &lt;iframe src="https://stoic-babbage-af94cf.netlify.app/child.html"/&gt;
+    </h2>
+    <input
+      type="button"
+      onclick="sayToChild('02', 'Hello from parent via contentWindow')"
+      value="Hello to child via contentWindow"
+    />
+    => Error<br />
+    <input
+      type="button"
+      onclick="postToChild('02', 'Hello from parent via postMessage', '*')"
+      value="Hello to child via postMessage, targetOrigin '*'"
+    />
+    => Success<br />
+    <input
+      type="button"
+      onclick="postToChild('02', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+    />
+    => Success<br />
+    <input
+      type="button"
+      onclick="postToChild('02', 'Hello from parent via postMessage', 'https://google.com/')"
+      value="Hello to child via postMessage, targetOrigin 'https://google.com/'"
+    />
+    => Nothing happens<br /><br />
+
     <iframe
-      id="childFrame"
+      id="childFrame02"
       src="https://stoic-babbage-af94cf.netlify.app/child.html"
       width="700"
     ></iframe>

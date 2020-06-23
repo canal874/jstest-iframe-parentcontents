@@ -1,16 +1,16 @@
-function postToChild(txt, targetOrigin) {
+function postToChild(targetFrame, txt, targetOrigin) {
   try {
     document
-      .getElementById("childFrame")
+      .getElementById("childFrame" + targetFrame)
       .contentWindow.postMessage({ command: "say", arg: txt }, targetOrigin);
   } catch (e) {
     say(`postToChild() error: ${e}`);
   }
 }
 
-function sayToChild(txt) {
+function sayToChild(targetFrame, txt) {
   try {
-    document.getElementById("childFrame").contentWindow.say(txt);
+    document.getElementById("childFrame" + targetFrame).contentWindow.say(txt);
   } catch (e) {
     say(`sayToChild() error: ${e}`);
   }
