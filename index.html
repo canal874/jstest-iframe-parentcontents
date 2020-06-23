@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>iframe playground</title>
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body style="font-size: 14px;">
+    <h1>iframe playground</h1>
+    output <input type="button" onclick="document.getElementById('result').innerHTML=''" value="clear"> 
+    <div id="result" style="width:700px; height:70px; border:1px solid black; overflow-y: scroll"></div>
+    <h2>&lt;iframe/&gt;<h2 />
+    <input
+      type="button"
+      onclick="sayToChild('Hello from parent via contentWindow')"
+      value="Hello to child via contentWindow"
+    /><br />
+    <input
+      type="button"
+      onclick="postToChild('Hello from parent via postMessage', '*')"
+      value="Hello to child via postMessage, targetOrigin '*'"
+    /><br />
+    <iframe
+      id="childFrame"
+      src="https://stoic-babbage-af94cf.netlify.app/child.html"
+      width="700"
+    ></iframe>
+    <br />
+  </body>
+</html>
