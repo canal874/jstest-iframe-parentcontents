@@ -50,8 +50,8 @@
     => Success<br />
     <input
       type="button"
-      onclick="postToChild('01', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
-      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+      onclick="postToChild('01', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
     />
     => Target origin not match error on console log<br />
     <br /><br />
@@ -61,7 +61,7 @@
     <hr />
     <h2>
       (2) &lt;iframe
-      src="https://stoic-babbage-af94cf.netlify.app/child.html"/&gt;
+      src="https://canal874-jstest-iframe-childcontents.netlify.app/child.html"/&gt;
     </h2>
     <input
       type="button"
@@ -77,8 +77,8 @@
     => Success<br />
     <input
       type="button"
-      onclick="postToChild('02', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
-      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+      onclick="postToChild('02', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
     />
     => Success<br />
     <input
@@ -90,7 +90,7 @@
 
     <iframe
       id="childFrame02"
-      src="https://stoic-babbage-af94cf.netlify.app/child.html"
+      src="https://canal874-jstest-iframe-childcontents.netlify.app/child.html"
       width="700"
     ></iframe>
     <br />
@@ -114,8 +114,8 @@
     => Nothing happens (because script not allowed in the child frame)<br />
     <input
       type="button"
-      onclick="postToChild('03', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
-      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+      onclick="postToChild('03', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
     />
     => Target origin not match error on console log<br /><br />
 
@@ -140,8 +140,8 @@
     => Success<br />
     <input
       type="button"
-      onclick="postToChild('04', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
-      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+      onclick="postToChild('04', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
     />
     => Target origin not match error on console log<br /><br />
 
@@ -155,7 +155,7 @@
     <hr />
     <h2>
       (5) &lt;iframe sandbox="allow-scripts"
-      src="https://stoic-babbage-af94cf.netlify.app/child.html"/&gt;
+      src="https://canal874-jstest-iframe-childcontents.netlify.app/child.html"/&gt;
     </h2>
     <input
       type="button"
@@ -171,8 +171,8 @@
     => Success<br />
     <input
       type="button"
-      onclick="postToChild('05', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
-      value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
+      onclick="postToChild('05', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
     />
     => Nothing happens (Chrome), Target origin not match error on console log (Firefox)<br />
      (NOTE: Target origin does not match the origin of the iframe because sandbox forces the iframe to be 'null' origin. )<br />
@@ -186,7 +186,7 @@
     <iframe
       sandbox="allow-scripts"
       id="childFrame05"
-      src="https://stoic-babbage-af94cf.netlify.app/child.html"
+      src="https://canal874-jstest-iframe-childcontents.netlify.app/child.html"
       width="700"
     ></iframe>
 
