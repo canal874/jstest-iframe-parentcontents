@@ -26,7 +26,7 @@
         <li>Push [button] => expected result (as of Jun.23, 2020) will be happen </li>
         <li>Successful result will be shown on output area. </li>
         <li>Catchable error will be shown on output area.</li>
-        <li>Uncaught error will be shown on console log of development tool. (Cross-origin error in postMessage() cannot be try catch.)</li>
+        <li>Uncaught error will be shown on console log of development tool. (Cross-origin error and Target-origin-not-match error  in postMessage() cannot be try catch.)</li>
         <li>Verified on Chrome and Firefox</li>
         <li>Have fun!</li>
       </ul>
@@ -53,7 +53,7 @@
       onclick="postToChild('01', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
       value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
     />
-    => Cross-origin error on console log<br />
+    => Target origin not match error on console log<br />
     <br /><br />
 
     <iframe id="childFrame01" src="child.html" width="700"></iframe>
@@ -86,7 +86,7 @@
       onclick="postToChild('02', 'Hello from parent via postMessage', 'https://google.com/')"
       value="Hello to child via postMessage, targetOrigin 'https://google.com/'"
     />
-    => Nothing happens (Chrome) , Cross-origin error on console (Firefox)<br /><br />
+    => Nothing happens (Chrome) , Target origin not match error on console (Firefox)<br /><br />
 
     <iframe
       id="childFrame02"
@@ -117,7 +117,7 @@
       onclick="postToChild('03', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
       value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
     />
-    => Cross-origin error on console log<br /><br />
+    => Target origin not match error on console log<br /><br />
 
     <iframe sandbox id="childFrame03" src="child3.html" width="700"></iframe>
 
@@ -143,7 +143,7 @@
       onclick="postToChild('04', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
       value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
     />
-    => Cross-origin error on console log<br /><br />
+    => Target origin not match error on console log<br /><br />
 
     <iframe
       sandbox="allow-scripts"
@@ -174,13 +174,14 @@
       onclick="postToChild('05', 'Hello from parent via postMessage', 'https://stoic-babbage-af94cf.netlify.app/')"
       value="Hello to child via postMessage, targetOrigin 'https://stoic-babbage-af94cf.netlify.app/'"
     />
-    => Nothing happens<br />
+    => Nothing happens (Chrome), Target origin not match error on console log (Firefox)<br />
+     (NOTE: Target origin does not match the origin of the iframe because sandbox forces the iframe to be 'null' origin. )<br />
     <input
       type="button"
       onclick="postToChild('05', 'Hello from parent via postMessage', 'https://google.com/')"
       value="Hello to child via postMessage, targetOrigin 'https://google.com/'"
     />
-    => Nothing happens (Chrome), Cross-orgin error on console log (Firefox)<br /><br />
+    => Nothing happens (Chrome), Target origin not match error on console log (Firefox) <br /><br />
 
     <iframe
       sandbox="allow-scripts"
@@ -188,6 +189,9 @@
       src="https://stoic-babbage-af94cf.netlify.app/child.html"
       width="700"
     ></iframe>
+
+
+
     <br />
   </body>
 </html>
