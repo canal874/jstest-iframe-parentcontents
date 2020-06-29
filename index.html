@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>iframe parent/child playground</title>
+    <title>iframe security playground</title>
     <script type="text/javascript" src="index.js"></script>
   </head>
   <body style="font-size: 14px; padding: 24px;">
@@ -18,15 +18,15 @@
         style="width:700px; height:70px; border:1px solid black; overflow-y: scroll"
       ></div>
     </div>
-    <h1 style="margin-top: 100px;">&lt;iframe&gt; parent/child playground</h1>
+    <h1 style="margin-top: 100px;">&lt;iframe&gt; security playground</h1>
     <p>
       Usage guide:<br />
       <ul>
         <li>This HTML document (parent) has many iframes (children) with different settings.
         <li>Push [button] => expected result (as of Jun.23, 2020) will be happen </li>
-        <li>Successful result will be shown on output area. </li>
-        <li>Catchable error will be shown on output area.</li>
-        <li>Uncaught error will be shown on console log of development tool. (Cross-origin error and Target-origin-not-match error  in postMessage() cannot be try catch.)</li>
+        <li>Passed result is shown on output area. </li>
+        <li>Catchable error is shown on output area.</li>
+        <li>Uncaught error is shown on console log of development tool. (Cross-origin error and Target-origin-not-match error  in postMessage() cannot be try catch.)</li>
         <li>Verified on Chrome and Firefox</li>
         <li>The source code can be easily tested on <a href="https://codesandbox.io/s/github/canal874/jstest-iframe-parentcontents">https://codesandbox.io/s/github/canal874/jstest-iframe-parentcontents</a>.</li>
         <li>Have fun!</li>
@@ -42,13 +42,13 @@
       onclick="sayToChild('01', 'Hello from parent via contentWindow')"
       value="Hello to child via contentWindow"
     />
-    => Success<br />
+    => Pass<br />
     <input
       type="button"
       onclick="postToChild('01', 'Hello from parent via postMessage', '*')"
       value="Hello to child via postMessage, targetOrigin '*'"
     />
-    => Success<br />
+    => Pass<br />
     <input
       type="button"
       onclick="postToChild('01', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
@@ -75,13 +75,13 @@
       onclick="postToChild('02', 'Hello from parent via postMessage', '*')"
       value="Hello to child via postMessage, targetOrigin '*'"
     />
-    => Success<br />
+    => Pass<br />
     <input
       type="button"
       onclick="postToChild('02', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
       value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
     />
-    => Success<br />
+    => Pass<br />
     <input
       type="button"
       onclick="postToChild('02', 'Hello from parent via postMessage', 'https://google.com/')"
@@ -138,7 +138,7 @@
       onclick="postToChild('04', 'Hello from parent via postMessage', '*')"
       value="Hello to child via postMessage, targetOrigin '*'"
     />
-    => Success<br />
+    => Pass<br />
     <input
       type="button"
       onclick="postToChild('04', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
@@ -169,7 +169,7 @@
       onclick="postToChild('05', 'Hello from parent via postMessage', '*')"
       value="Hello to child via postMessage, targetOrigin '*'"
     />
-    => Success<br />
+    => Pass<br />
     <input
       type="button"
       onclick="postToChild('05', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
@@ -192,6 +192,77 @@
     ></iframe>
 
 
+
+
+
+    
+    <hr />
+    <h2>
+      (6) &lt;iframe sandbox="allow-same-origin allow-scripts" src="child6.html"/&gt;(same origin)
+    </h2>
+
+    <input
+      type="button"
+      onclick="sayToChild('06', 'Hello from parent via contentWindow')"
+      value="Hello to child via contentWindow"
+    />
+    => Pass<br />
+    <input
+      type="button"
+      onclick="postToChild('06', 'Hello from parent via postMessage', '*')"
+      value="Hello to child via postMessage, targetOrigin '*'"
+    />
+    => Pass<br />
+    <input
+      type="button"
+      onclick="postToChild('06', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
+    />
+    => Target origin not match error on console log<br /><br />
+
+    <iframe
+      sandbox="allow-same-origin allow-scripts"
+      id="childFrame06"
+      src="child6.html"
+      width="700"
+    ></iframe>
+
+    <hr />
+    <h2>
+      (7) &lt;iframe sandbox="allow-same-origin allow-scripts"
+      src="https://canal874-jstest-iframe-childcontents.netlify.app/child.html"/&gt;
+    </h2>
+    <input
+      type="button"
+      onclick="sayToChild('07', 'Hello from parent via contentWindow')"
+      value="Hello to child via contentWindow"
+    />
+    => Cross-origin error on output<br />
+    <input
+      type="button"
+      onclick="postToChild('07', 'Hello from parent via postMessage', '*')"
+      value="Hello to child via postMessage, targetOrigin '*'"
+    />
+    => Pass<br />
+    <input
+      type="button"
+      onclick="postToChild('07', 'Hello from parent via postMessage', 'https://canal874-jstest-iframe-childcontents.netlify.app/')"
+      value="Hello to child via postMessage, targetOrigin 'https://canal874-jstest-iframe-childcontents.netlify.app/'"
+    />
+    => Pass<br />
+    <input
+      type="button"
+      onclick="postToChild('07', 'Hello from parent via postMessage', 'https://google.com/')"
+      value="Hello to child via postMessage, targetOrigin 'https://google.com/'"
+    />
+    => Target origin not match error on console log<br /><br />
+
+    <iframe
+      sandbox="allow-same-origin allow-scripts"
+      id="childFrame07"
+      src="https://canal874-jstest-iframe-childcontents.netlify.app/child.html"
+      width="700"
+    ></iframe>
 
     <br />
   </body>
